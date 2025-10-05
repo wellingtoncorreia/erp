@@ -47,7 +47,7 @@ export const useDashboard = () => {
   };
 
   const performLogout = useCallback(() => {
-    Cookies.remove('logged');
+    localStorage.removeItem('logged');
     localStorage.removeItem('userName');
     router.push('/');
   }, [router]);
