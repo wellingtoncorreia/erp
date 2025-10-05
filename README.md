@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+ERP Simples - Sistema de Gerenciamento
+Este é um projeto de simulação de um sistema de ERP (Enterprise Resource Planning) desenvolvido para fins de estudo e portfólio. A aplicação é focada no front-end e simula a interação com um backend para gerenciar usuários, finanças e estoque de uma pequena empresa.
 
-## Getting Started
+➡️ Acesse a demonstração ao vivo: https://erp-alpha-green.vercel.app/
 
-First, run the development server:
+📸 Screenshot
+<img width="1919" height="867" alt="image" src="https://github.com/user-attachments/assets/25c4cf0a-4168-4df7-8eeb-4c80d2f47967" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+✨ Funcionalidades Principais
+Autenticação de Usuários: Sistema de login completo com fallback para dados mockados caso o backend não esteja disponível.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Registro de Novos Usuários: Formulário de cadastro que verifica o status do backend antes de ser exibido.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sessão com Logout por Inatividade: O usuário é desconectado automaticamente após um período de inatividade, com um aviso prévio de 30 segundos.
 
-## Learn More
+Dashl de cboard Intuitivo: Paineontrole com resumos visuais do saldo financeiro (receitas, despesas) e estatísticas de estoque.
 
-To learn more about Next.js, take a look at the following resources:
+Módulo Financeiro: Permite adicionar e remover transações de receita e despesa, com atualização em tempo real no dashboard.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Módulo de Estoque: Permite adicionar e remover produtos, controlando nome, quantidade em estoque e preço.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Design Responsivo: A interface se adapta a diferentes tamanhos de tela.
 
-## Deploy on Vercel
+🛠️ Tecnologias Utilizadas
+Este projeto foi construído com tecnologias modernas do ecossistema JavaScript:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Framework: Next.js (com App Router)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Linguagem: TypeScript
+
+Biblioteca UI: React
+
+Estilização: Tailwind CSS
+
+Requisições HTTP: Axios
+
+Alertas e Modais: SweetAlert2
+
+Hospedagem: Vercel
+
