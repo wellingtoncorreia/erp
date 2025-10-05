@@ -11,7 +11,6 @@ import { useInactivityTimer } from './useInactivityTimer';
 import { ErpData } from '../types';
 
 export const useDashboard = () => {
-  // --- Hooks de Lógica e Estado ---
   const { fetchData, addItem, deleteItem } = useAPIService();
   const router = useRouter();
   const [erpData, setErpData] = useState<ErpData>({ inventory: [], financial: [] });
@@ -19,7 +18,6 @@ export const useDashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // --- Lógica de Dados (CRUD) ---
   const loadInitialData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -48,15 +46,16 @@ export const useDashboard = () => {
     await loadInitialData();
   };
 
-  // --- Lógica de Sessão e Inatividade ---
   const performLogout = useCallback(() => {
-    localStorage.removeItem('logged'); // Assumindo que a autenticação usa cookies
+    Cookies.remove('logged');
     localStorage.removeItem('userName');
     router.push('/');
   }, [router]);
 
   const showInactivityModal = useCallback(() => {
-    let timerInterval: NodeJS.Timeout;
+    // CORREÇÃO APLICADA AQUI
+    let timerInterval: NodeJS.Timeout | undefined;
+
     Swal.fire({
       title: 'Você ainda está aí?',
       html: 'Sua sessão será encerrada por inatividade em <b></b> segundos.',
@@ -66,8 +65,23 @@ export const useDashboard = () => {
       confirmButtonText: 'Continuar Logado',
       cancelButtonText: 'Sair Agora',
       cancelButtonColor: '#d33',
-      didOpen: () => { /* ... (código do timer do SweetAlert) */ },
-      willClose: () => clearInterval(timerInterval)
+      didOpen: () => {
+        const timerElement = Swal.getHtmlContainer()?.querySelector('b');
+        if (timerElement) {
+          timerInterval = setInterval(() => {
+            const timeLeft = Swal.getTimerLeft();
+            if (timeLeft !== undefined) {
+              timerElement.textContent = Math.ceil(timeLeft / 1000).toString();
+            }
+          }, 1000);
+        }
+      },
+      willClose: () => {
+        // Verificamos se 'timerInterval' tem um valor antes de limpá-lo
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+      }
     }).then((result) => {
       if (result.dismiss === Swal.DismissReason.timer || result.dismiss === Swal.DismissReason.cancel) {
         performLogout();
@@ -75,17 +89,15 @@ export const useDashboard = () => {
     });
   }, [performLogout]);
 
-  // Ativa o timer de inatividade (15 minutos)
+  // Usando um tempo de 30 segundos para teste
   useInactivityTimer({ onIdle: showInactivityModal, timeout: 30000 });
 
-  // --- Cálculos Derivados ---
   const financialSummary = useMemo(() => {
     const revenues = erpData.financial.filter(t => t.type === 'Receita').reduce((sum, t) => sum + (t.amount || 0), 0);
     const expenses = erpData.financial.filter(t => t.type === 'Despesa').reduce((sum, t) => sum + (t.amount || 0), 0);
     return { revenues, expenses, netBalance: revenues - expenses };
   }, [erpData.financial]);
   
-  // --- Retorno do Hook ---
   return {
     isLoading,
     error,
