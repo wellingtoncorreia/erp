@@ -14,7 +14,7 @@ Registro de Novos Usuários: Formulário de cadastro que verifica o status do ba
 
 Sessão com Logout por Inatividade: O usuário é desconectado automaticamente após um período de inatividade, com um aviso prévio de 30 segundos.
 
-Dashl de cboard Intuitivo: Paineontrole com resumos visuais do saldo financeiro (receitas, despesas) e estatísticas de estoque.
+Dashboard Intuitivo: Paineontrole com resumos visuais do saldo financeiro (receitas, despesas) e estatísticas de estoque.
 
 Módulo Financeiro: Permite adicionar e remover transações de receita e despesa, com atualização em tempo real no dashboard.
 
