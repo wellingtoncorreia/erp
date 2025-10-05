@@ -14,7 +14,7 @@ interface InactivityTimerProps {
 }
 
 export const useInactivityTimer = ({ onIdle, timeout }: InactivityTimerProps) => {
-  const timerRef = useRef<NodeJS.Timeout>();
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Função para resetar o timer de inatividade
   const resetTimer = () => {
