@@ -38,4 +38,20 @@ Requisições HTTP: Axios
 Alertas e Modais: SweetAlert2
 
 Hospedagem: Vercel
+⚙️ Simulação de Backend
+Este projeto foi desenhado para funcionar de forma independente do backend para fins de demonstração.
+
+Login Mockado: Se o backend em http://localhost:8080 não for encontrado, o sistema de login automaticamente habilita um modo de simulação. Use as seguintes credenciais para acessar:
+
+Usuário: admin
+
+Senha: admin
+
+Verificação de API no Registro: A página de registro primeiro tenta se comunicar com a rota /health do backend. Se não obtiver resposta, ela exibirá uma tela de aviso informando que a API está offline e fornecerá as credenciais mockadas acima para facilitar o teste.
+
+📝 Estrutura de Pastas
+A estrutura do projeto segue as convenções do Next.js App Router para uma boa organização:
+
+<img width="905" height="238" alt="image" src="https://github.com/user-attachments/assets/dde6727d-3da4-483e-b74e-5588d84c6694" />
+
 
